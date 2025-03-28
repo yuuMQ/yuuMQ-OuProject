@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+    <script>
+        async function sendMessage() {
+            let query = document.getElementById("query").value;
+            let response = await fetch("http://127.0.0.1:5000/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ "query": query })
+            });
+            let result = await response.json();
+            document.getElementById("response").innerText = result.response;
+        }
+    </script>
+</head>
+<body>
+    <h2>Chat với AI</h2>
+    <input type="text" id="query" placeholder="Nhập câu hỏi..." />
+    <button onclick="sendMessage()">Gửi</button>
+    <p><strong>Trả lời:</strong> <span id="response"></span></p>
+</body>
+</html>
